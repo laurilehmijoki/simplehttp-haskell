@@ -1,9 +1,10 @@
-import Network (listenOn, withSocketsDo, accept, PortID(..), Socket)
-import System (getArgs)
+import Network
+import System
 import System.IO
 import System.Directory
-import Control.Concurrent (forkIO)
+import Control.Concurrent
 import Data.List
+import qualified Data.ByteString.Lazy as BL
 
 main :: IO ()
 main = withSocketsDo $ do
@@ -39,7 +40,7 @@ serve405 handle = do
 serveFile relativePath handle = do
   currentDir <- getCurrentDirectory
   let filePath = currentDir ++ relativePath
-  resourceContent <- readFile filePath
+  resourceContent <- BL.readFile filePath
   serve200 (resolveContentType filePath) resourceContent handle
 
 serve200 contentType resourceContent handle = do
@@ -47,7 +48,7 @@ serve200 contentType resourceContent handle = do
   hPutStrLn handle "Date: Fri, 19 Aug 2012 23:59:59 GMT"
   hPutStrLn handle ("Content-Type: " ++ contentType)
   hPutStrLn handle ""
-  hPutStrLn handle resourceContent
+  BL.hPut handle resourceContent
   hClose handle
 
 resolveContentType filePath =
