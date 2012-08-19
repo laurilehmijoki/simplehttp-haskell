@@ -16,6 +16,6 @@ This will launch you an HTTP server on port 9999.
 
 ## Compile
 
-`ghc -o simplehttp \`ls \*.hs\``
+`ghc -o simplehttp \`ls \*.hs\` `
 
 Now you can run the compiled binary with `simplehttp 9999`.
