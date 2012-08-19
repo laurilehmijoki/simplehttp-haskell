@@ -51,6 +51,12 @@ serve200 contentType resourceContent handle = do
   hClose handle
 
 resolveContentType filePath =
-  case ".html" `isSuffixOf` filePath of
-    True -> "text/html"
-    _    -> "text/plain"
+  case suffix of
+    "html" -> "text/html"
+    "png"  -> "text/png"
+    "jpg"  -> "text/jpg"
+    "jpeg" -> "text/jpeg"
+    "gif"  -> "text/gif"
+    "css"  -> "text/css"
+    _      -> "text/plain"
+    where suffix = reverse $ takeWhile (\c -> c /= '.') (reverse filePath)
