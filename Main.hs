@@ -31,7 +31,7 @@ httpHandler handle = do
 
 serve405 handle = do
   hPutStrLn handle "HTTP/1.1 405 Method Not Allowed"
-  hPutStrLn handle "Date: Fri, 19 Aug 2012 23:59:59 GMT"
+  hPutStrLn handle "Date: Thu, 1 Jan 1970 00:00:01 GMT"
   hPutStrLn handle "Content-Type: text/plain"
   hPutStrLn handle ""
   hPutStrLn handle "This server supports only GET requests"
@@ -45,7 +45,7 @@ serveFile relativePath handle = do
 
 serve200 contentType resourceContent handle = do
   hPutStrLn handle "HTTP/1.1 200 OK"
-  hPutStrLn handle "Date: Fri, 19 Aug 2012 23:59:59 GMT"
+  hPutStrLn handle "Date: Thu, 1 Jan 1970 00:00:01 GMT"
   hPutStrLn handle ("Content-Type: " ++ contentType)
   hPutStrLn handle ""
   BL.hPut handle resourceContent
