@@ -67,4 +67,7 @@ resolveContentType filePath =
     "gif"  -> "text/gif"
     "css"  -> "text/css"
     _      -> "text/plain"
-    where suffix = reverse $ takeWhile (\c -> c /= '.') (reverse filePath)
+    where
+      suffix = reverse $ takeUntilDot $ reverse filePath
+      takeUntilDot str = takeWhile isDot str
+      isDot c = c /= '.'
