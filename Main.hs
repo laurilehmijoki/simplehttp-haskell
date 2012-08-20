@@ -42,14 +42,6 @@ serveFile relativePath handle = do
   resourceContent <- BL.readFile filePath
   serve200 (resolveContentType filePath) resourceContent handle
 
-getFilePath relativePath = do
-  currentDir <- getCurrentDirectory
-  let absolutePath = currentDir ++ relativePath
-  return $ absolutePath ++ indexHtmlIfNeeded
-  where
-    endsWithSlash = last relativePath == '/'
-    indexHtmlIfNeeded = if endsWithSlash then "index.html" else ""
-
 serve200 contentType resourceContent handle = do
   hPutStrLn handle "HTTP/1.1 200 OK"
   hPutStrLn handle "Date: Thu, 1 Jan 1970 00:00:01 GMT"
@@ -57,6 +49,14 @@ serve200 contentType resourceContent handle = do
   hPutStrLn handle ""
   BL.hPut handle resourceContent
   hClose handle
+
+getFilePath relativePath = do
+  currentDir <- getCurrentDirectory
+  let absolutePath = currentDir ++ relativePath
+  return $ absolutePath ++ indexHtmlIfNeeded
+  where
+    endsWithSlash = last relativePath == '/'
+    indexHtmlIfNeeded = if endsWithSlash then "index.html" else ""
 
 resolveContentType filePath =
   case suffix of
