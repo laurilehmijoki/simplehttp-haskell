@@ -38,10 +38,17 @@ serve405 handle = do
   hClose handle
 
 serveFile relativePath handle = do
-  currentDir <- getCurrentDirectory
-  let filePath = currentDir ++ relativePath
+  filePath <- getFilePath relativePath
   resourceContent <- BL.readFile filePath
   serve200 (resolveContentType filePath) resourceContent handle
+
+getFilePath relativePath = do
+  currentDir <- getCurrentDirectory
+  let absolutePath = currentDir ++ relativePath
+  return $ absolutePath ++ indexHtmlIfNeeded
+  where
+    endsWithSlash = last relativePath == '/'
+    indexHtmlIfNeeded = if endsWithSlash then "index.html" else ""
 
 serve200 contentType resourceContent handle = do
   hPutStrLn handle "HTTP/1.1 200 OK"
