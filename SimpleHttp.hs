@@ -1,5 +1,5 @@
 import Network
-import System
+import System.Environment
 import System.IO
 import System.Directory
 import Control.Concurrent
