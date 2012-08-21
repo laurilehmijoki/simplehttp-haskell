@@ -1,0 +1,24 @@
+Name:                simplehttp
+
+-- The package version. See the Haskell package versioning policy
+-- (http://www.haskell.org/haskellwiki/Package_versioning_policy) for
+-- standards guiding when and how versions should be incremented.
+Version:             0.1
+
+Synopsis:            An HTTP server for delivering static files
+Homepage:            https://github.com/laurilehmijoki/simplehttp-haskell
+License:             BSD3
+License-file:        LICENSE
+Author:              Lauri Lehmijoki
+Maintainer:          lauri.lehmijoki@iki.fi
+Category:            Web
+Build-type:          Simple
+Cabal-version:       >=1.2
+Executable simplehttp
+  main-is: SimpleHttp.hs
+  Build-depends:
+    base >= 4 && < 5,
+    directory,
+    network,
+    bytestring
+  hs-source-dirs: .
