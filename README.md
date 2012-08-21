@@ -19,3 +19,7 @@ This will launch you an HTTP server on port 9999.
 `ghc -o simplehttp SimpleHttp.hs`
 
 Now you can run the compiled binary with `simplehttp 9999`.
+
+## Package
+
+`cabal install` will create an executable under directory *dist*.
