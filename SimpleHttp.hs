@@ -61,10 +61,10 @@ getFilePath relativePath = do
 resolveContentType filePath =
   case suffix of
     "html" -> "text/html"
-    "png"  -> "text/png"
-    "jpg"  -> "text/jpg"
-    "jpeg" -> "text/jpeg"
-    "gif"  -> "text/gif"
+    "png"  -> "image/png"
+    "jpg"  -> "image/jpg"
+    "jpeg" -> "image/jpeg"
+    "gif"  -> "image/gif"
     "css"  -> "text/css"
     _      -> "text/plain"
     where
