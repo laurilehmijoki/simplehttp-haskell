@@ -37,10 +37,12 @@ serve405 handle = do
   hPutStrLn handle "This server supports only GET requests"
   hClose handle
 
-serveFile relativePath handle = do
-  filePath <- getFilePath relativePath
-  resourceContent <- BL.readFile filePath
-  serve200 (resolveContentType filePath) resourceContent handle
+serveFile relativePath handle =
+  getFilePath relativePath >>= \filePath -> serveBinaryFile filePath handle
+
+serveBinaryFile filePath handle =
+  BL.readFile filePath >>=
+    \resourceContent -> serve200 (resolveContentType filePath) resourceContent handle
 
 serve200 contentType resourceContent handle = do
   hPutStrLn handle "HTTP/1.1 200 OK"
