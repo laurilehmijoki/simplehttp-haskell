@@ -53,8 +53,7 @@ serve200 contentType resourceContent handle = do
   hClose handle
 
 getFilePath relativePath = do
-  currentDir <- getCurrentDirectory
-  let absolutePath = currentDir ++ relativePath
+  absolutePath <- fmap (++ relativePath) getCurrentDirectory
   return $ absolutePath ++ indexHtmlIfNeeded
   where
     endsWithSlash = last relativePath == '/'
