@@ -1,6 +1,8 @@
-# Simple HTTP server
+# An experimental HTTP server
 
 Useful for serving HTML documents from localhost.
+
+Not suitable for production use.
 
 ## Setup
 
